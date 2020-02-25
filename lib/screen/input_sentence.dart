@@ -9,10 +9,13 @@ class InputSentenceScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('変換する'),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: null),
       body: Center(
-        child: Column(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
           children: <Widget>[
-            InputSentenceDescWidget(),
+            InputSentenceFormWidget(),
+            SizedBox(height: 16,),
             InputSentenceDescWidget()
           ],
         ),
