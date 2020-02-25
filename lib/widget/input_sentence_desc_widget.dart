@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:rubbby/util/util.dart';
+
 class InputSentenceDescWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _InputSentenceDescWidgetState();
@@ -19,7 +21,7 @@ class _InputSentenceDescWidgetState extends State<InputSentenceDescWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      color: _isExpanded ? Colors.red : Colors.blue,
+      color: Colors.red,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,16 +30,27 @@ class _InputSentenceDescWidgetState extends State<InputSentenceDescWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Text('Title'),
+              Text(
+                Strings.usageDescriptionTitle,
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+              ),
               Expanded(child: SizedBox()),
               FlatButton(
                 onPressed: () => _onPressedButton(),
-                child: Text(_isExpanded ? '表示する': '閉じる')
+                child: Text(
+                  _isExpanded ? Strings.usageDescriptionClose : Strings.usageDescriptionOpen,
+                  style: TextStyle(color: Colors.white),
+                )
               )
             ]
           ),
           // Text view
-          _isExpanded ? SizedBox() : Text('説明のところ'),
+          _isExpanded 
+            ? Text(
+              Strings.usageDescriptionContent,
+              style: TextStyle(color: Colors.white, fontSize: 14),
+            ) 
+            : SizedBox(),
         ]
       )
     );
