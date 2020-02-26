@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:rubbby/model/model.dart';
+
+// MARK: - Widget
+
 class InputSentenceFormWidget extends StatefulWidget {
 
   final FocusNode focusNode;
@@ -13,10 +17,15 @@ class InputSentenceFormWidget extends StatefulWidget {
   State<StatefulWidget> createState() => _InputSentenceFormWidgetState();
 }
 
+// MARK: - State
+
 class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   TextEditingController _textEditingController;
 
+  OutputType _selectedValue = OutputType.hiragana;
   bool _isEditing = false;
+  
+  // MARK: Private method
 
   void _onPressCloseButton() {
     _textEditingController.text = '';
@@ -27,6 +36,31 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
       _isEditing = widget.focusNode.hasFocus;
     });
   }
+
+  void _onChangedDropDownButton(OutputType outputType) {
+    setState(() {
+      _selectedValue = outputType;
+    });
+  }
+
+  DropdownButton _buildDropDownButtons() {
+    return DropdownButton<OutputType>(
+      items: [
+        DropdownMenuItem(
+          value: OutputType.hiragana,
+          child: Text('ひらがな'),
+        ),
+        DropdownMenuItem(
+          value: OutputType.katakana,
+          child: Text('カタカナ'),
+        )
+      ],
+      value: _selectedValue,
+      onChanged: (value) => _onChangedDropDownButton(value),
+    );
+  }
+
+  // MARK: Lifecycle
 
   @override
   void initState() {
@@ -55,7 +89,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                 SizedBox(width: 8),
                 Icon(Icons.chevron_right),
                 SizedBox(width: 8),
-                Text('ひらがな'),
+                _buildDropDownButtons(),
                 Expanded(child: SizedBox()),
                 IconButton(
                   icon: Icon(Icons.close),
