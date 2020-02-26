@@ -9,10 +9,17 @@ class ResultScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('変換結果'),
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
+      body: Stack(
         children: <Widget>[
-          ResultOutputWidget(convertedText: 'Converted', originalText: 'Oritinal')
+          // List
+          ListView(
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
+            children: <Widget>[
+              ResultOutputWidget(convertedText: 'Converted', originalText: 'Oritinal')
+            ],
+          ),
+          // Button
+          ResultBottomWidget(),
         ],
       ),
     );
