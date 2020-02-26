@@ -25,14 +25,14 @@ class InputSentenceScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
           children: <Widget>[
             // NOTE: デフォルトだと依存関係を引数で渡すしかない
-            InputSentenceFormWidget(focusNode: _focusNode,),
+            InputSentenceFormWidget(focusNode: _focusNode, repository: repository,),
             SizedBox(height: 16,),
             InputSentenceDescWidget()
           ],
         ),
       ),
       // NOTE: デフォルトだと依存関係を引数で渡すしかない
-      floatingActionButton: InputSentenceFabMenuWidget(focusNode: _focusNode,),
+      floatingActionButton: InputSentenceFabMenuWidget(focusNode: _focusNode, repository: repository,),
     );
   }
 }
