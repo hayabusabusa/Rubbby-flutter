@@ -62,7 +62,10 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           // Cancel button
+          // NOTE: 複数のFABがある場合はデフォルトで設定されているHeroタグが被るので、
+          //       ユニークなタグを設定してあげる必要がある.
           FloatingActionButton.extended(
+            heroTag: 'InputSentenceCancel',
             onPressed: () => _onPressCancelButton(), 
             label: Text(Strings.closeButtonTitle),
             icon: Icon(Icons.close),
@@ -71,6 +74,7 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
           SizedBox(width: 8),
           // Translate button
           FloatingActionButton.extended(
+            heroTag: 'InputSentenceTranslate',
             onPressed: () => _onPressedTranslateButton(),
             label: Text(Strings.translateButtonTitle),
             icon: Icon(Icons.translate),

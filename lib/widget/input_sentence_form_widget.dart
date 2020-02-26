@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:rubbby/app_routes.dart';
 import 'package:rubbby/model/model.dart';
 import 'package:rubbby/util/util.dart';
 
@@ -28,7 +29,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   
   // MARK: Private method
 
-  void _onPressCloseButton() {
+  void _onPressedCloseButton() {
     _textEditingController.text = '';
   }
 
@@ -42,6 +43,10 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
     setState(() {
       _selectedValue = outputType;
     });
+  }
+
+  void _onPressedTranslateButton() {
+    Navigator.of(context).pushNamed(AppRoutes.result);
   }
 
   DropdownButton _buildDropDownButtons() {
@@ -94,7 +99,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                 Expanded(child: SizedBox()),
                 IconButton(
                   icon: Icon(Icons.cancel, color: Colors.grey,),
-                   onPressed: () => _onPressCloseButton(),
+                   onPressed: () => _onPressedCloseButton(),
                 )
               ]
             ),
@@ -106,6 +111,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
               focusNode: widget.focusNode,
               keyboardType: TextInputType.multiline,
               controller: _textEditingController,
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold,),
               decoration: InputDecoration(
                 hintText: Strings.inputSentenceTextFieldHintText,
                 border: InputBorder.none,
@@ -128,7 +134,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                     ),
                     color: Colors.blue,
                     shape: StadiumBorder(),
-                    onPressed: () {},
+                    onPressed: () => _onPressedTranslateButton(),
                   ),
                 )
               ],
