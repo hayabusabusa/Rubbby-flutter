@@ -1,2 +1,3 @@
 export './output_type.dart';
-export './Translation.dart';
+export './translation.dart';
+export './post_sentence_params.dart';

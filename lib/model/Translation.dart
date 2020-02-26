@@ -16,7 +16,7 @@ class Translation extends Equatable {
     outputType,
   ];
 
-  static Translation fromJson(dynamic json) {
+  static Translation fromJson(Map<String, dynamic> json) {
     return Translation(
       converted: json['converted'],
       outputType: _mapStringToOutputType(json['output_type'])

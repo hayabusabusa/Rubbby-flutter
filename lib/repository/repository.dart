@@ -1,0 +1,1 @@
+export './hiragana_translation_api_client.dart';
