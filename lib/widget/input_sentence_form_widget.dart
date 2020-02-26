@@ -92,7 +92,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                 _buildDropDownButtons(),
                 Expanded(child: SizedBox()),
                 IconButton(
-                  icon: Icon(Icons.close),
+                  icon: Icon(Icons.cancel, color: Colors.grey,),
                    onPressed: () => _onPressCloseButton(),
                 )
               ]
@@ -118,9 +118,12 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                   opacity: _isEditing ? 0 : 1, 
                   duration: Duration(milliseconds: 200),
                   child: RaisedButton(
-                    child: Text(
-                      '変換する',
-                      style: TextStyle(color: Colors.white),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                      child: Text(
+                        '変換する',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                     color: Colors.blue,
                     shape: StadiumBorder(),

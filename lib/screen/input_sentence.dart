@@ -13,7 +13,7 @@ class InputSentenceScreen extends StatelessWidget {
       ),
       body: Center(
         child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
           children: <Widget>[
             InputSentenceFormWidget(focusNode: _focusNode,),
             SizedBox(height: 16,),

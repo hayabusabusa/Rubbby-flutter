@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// MARK: - Widget
+
 class InputSentenceFabMenuWidget extends StatefulWidget {
 
   final FocusNode focusNode;
@@ -13,9 +15,13 @@ class InputSentenceFabMenuWidget extends StatefulWidget {
   State<StatefulWidget> createState() => _InputSentenceFabMenuWidgetState();
 }
 
+// MARK: - State
+
 class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget> {
 
   bool _isEditing = false;
+
+  // MARK: Private method
 
   void _onUpdateFocusNode() {
     setState(() {
@@ -23,9 +29,15 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
     });
   }
 
+  void _onPressedTranslateButton() {
+    widget.focusNode.unfocus();
+  }
+
   void _onPressCancelButton() {
     widget.focusNode.unfocus();
   }
+
+  // MARK: Lifecycle
 
   @override
   void initState() {
@@ -50,13 +62,14 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
           // Cancel button
           FloatingActionButton.extended(
             onPressed: () => _onPressCancelButton(), 
-            label: Text('キャンセル'),
+            label: Text('閉じる'),
+            icon: Icon(Icons.close),
           ),
           // Spacer
           SizedBox(width: 8),
           // Translate button
           FloatingActionButton.extended(
-            onPressed: () {},
+            onPressed: () => _onPressedTranslateButton(),
             label: Text('変換する'),
             icon: Icon(Icons.translate),
           ),
