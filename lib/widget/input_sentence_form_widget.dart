@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:rubbby/model/model.dart';
+import 'package:rubbby/util/util.dart';
 
 // MARK: - Widget
 
@@ -48,11 +49,11 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
       items: [
         DropdownMenuItem(
           value: OutputType.hiragana,
-          child: Text('ひらがな'),
+          child: Text(Strings.hiragana),
         ),
         DropdownMenuItem(
           value: OutputType.katakana,
-          child: Text('カタカナ'),
+          child: Text(Strings.katakana),
         )
       ],
       value: _selectedValue,
@@ -85,7 +86,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
             // Title
             Row(
               children: <Widget>[
-                Text('漢字の入った文章'),
+                Text(Strings.inputSentenceTitleText),
                 SizedBox(width: 8),
                 Icon(Icons.chevron_right),
                 SizedBox(width: 8),
@@ -106,7 +107,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
               keyboardType: TextInputType.multiline,
               controller: _textEditingController,
               decoration: InputDecoration(
-                hintText: '変換したいテキストを入力',
+                hintText: Strings.inputSentenceTextFieldHintText,
                 border: InputBorder.none,
               ),
             ),
@@ -121,7 +122,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                       child: Text(
-                        '変換する',
+                        Strings.translateButtonTitle,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),

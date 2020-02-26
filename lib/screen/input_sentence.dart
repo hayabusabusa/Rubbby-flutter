@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:rubbby/util/util.dart';
 import 'package:rubbby/widget/widget.dart';
 
 class InputSentenceScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class InputSentenceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('変換する'),
+        title: Text(Strings.translateButtonTitle),
       ),
       body: Center(
         child: ListView(

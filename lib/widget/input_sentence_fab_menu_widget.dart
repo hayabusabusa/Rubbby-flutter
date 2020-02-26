@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:rubbby/util/util.dart';
+
 // MARK: - Widget
 
 class InputSentenceFabMenuWidget extends StatefulWidget {
@@ -62,7 +64,7 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
           // Cancel button
           FloatingActionButton.extended(
             onPressed: () => _onPressCancelButton(), 
-            label: Text('閉じる'),
+            label: Text(Strings.closeButtonTitle),
             icon: Icon(Icons.close),
           ),
           // Spacer
@@ -70,7 +72,7 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
           // Translate button
           FloatingActionButton.extended(
             onPressed: () => _onPressedTranslateButton(),
-            label: Text('変換する'),
+            label: Text(Strings.translateButtonTitle),
             icon: Icon(Icons.translate),
           ),
         ]
