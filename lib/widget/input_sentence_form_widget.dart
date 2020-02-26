@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'package:rubbby/app_routes.dart';
 import 'package:rubbby/model/model.dart';
+import 'package:rubbby/repository/repository.dart';
 import 'package:rubbby/util/util.dart';
 
 // MARK: - Widget
 
 class InputSentenceFormWidget extends StatefulWidget {
-
   final FocusNode focusNode;
+  final HiraganaTranslationRepository repository;
 
   InputSentenceFormWidget({
     Key key,
     @required this.focusNode,
-  }): super(key: key);
+    @required this.repository,
+  }): assert(focusNode != null, repository != null),
+      super(key: key);
 
   @override
   State<StatefulWidget> createState() => _InputSentenceFormWidgetState();

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'package:rubbby/repository/repository.dart';
 import 'package:rubbby/util/util.dart';
 
 // MARK: - Widget
 
 class InputSentenceFabMenuWidget extends StatefulWidget {
-
   final FocusNode focusNode;
+  final HiraganaTranslationRepository repository;
 
   InputSentenceFabMenuWidget({
     Key key,
-    @required this.focusNode
-  }): super(key: key);
+    @required this.focusNode,
+    @required this.repository,
+  }): assert(focusNode != null, repository != null),
+      super(key: key);
 
   @override
   State<StatefulWidget> createState() => _InputSentenceFabMenuWidgetState();
