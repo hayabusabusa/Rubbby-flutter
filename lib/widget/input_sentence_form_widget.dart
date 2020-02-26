@@ -9,15 +9,23 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   FocusNode _focusNode;
   TextEditingController _textEditingController;
 
+  bool _isEditing = false;
+
   void _onTapCloseButton(BuildContext context) {
     _focusNode.unfocus();
+  }
+
+  void _onUpdateFocusNode() {
+    setState(() {
+      _isEditing = _focusNode.hasFocus;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     _focusNode = FocusNode();
-    _focusNode.addListener(() => print('focusNode updated: hasFocus: ${_focusNode.hasFocus}'));
+    _focusNode.addListener(() => _onUpdateFocusNode());
     _textEditingController = TextEditingController();
   }
 
@@ -66,9 +74,13 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
             Row(
               children: <Widget>[
                 Expanded(child: SizedBox()),
-                RaisedButton(
-                  child: Text('変換する'),
-                  onPressed: () {},
+                AnimatedOpacity(
+                  opacity: _isEditing ? 0 : 1, 
+                  duration: Duration(milliseconds: 300),
+                  child: RaisedButton(
+                    child: Text('変換する'),
+                    onPressed: () {},
+                  ),
                 )
               ],
             ),
