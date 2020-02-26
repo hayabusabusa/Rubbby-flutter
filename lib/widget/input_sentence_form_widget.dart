@@ -111,6 +111,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
               focusNode: widget.focusNode,
               keyboardType: TextInputType.multiline,
               controller: _textEditingController,
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold,),
               decoration: InputDecoration(
                 hintText: Strings.inputSentenceTextFieldHintText,
                 border: InputBorder.none,

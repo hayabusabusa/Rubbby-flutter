@@ -56,6 +56,8 @@ class ResultOutputWidget extends StatelessWidget {
               textAlign: TextAlign.left,
               style: TextStyle(color: Colors.grey, fontSize: 16),
             ),
+            // Spacer
+            SizedBox(height: 8,)
           ],
         ),
       ),
