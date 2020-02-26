@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(RubbbyApp());
+import 'package:rubbby/app_routes.dart';
+import 'package:rubbby/screen/screen.dart';
+
+void main() {
+  runApp(RubbbyApp());
+}
 
 class RubbbyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Center(
-        child: Text('Rubbby'),
-      )
+      initialRoute: AppRoutes.inputSentence,
+      routes: {
+        AppRoutes.inputSentence: (context) => InputSentenceScreen()
+      },
     );
   }
 }
