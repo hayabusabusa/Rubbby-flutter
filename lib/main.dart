@@ -26,7 +26,6 @@ class RubbbyApp extends StatelessWidget {
       initialRoute: AppRoutes.inputSentence,
       routes: {
         AppRoutes.inputSentence: (context) => InputSentenceScreen(repository: repository,),
-        AppRoutes.result: (context) => ResultScreen(),
       },
     );
   }

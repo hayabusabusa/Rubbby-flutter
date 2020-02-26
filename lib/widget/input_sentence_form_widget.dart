@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:rubbby/app_routes.dart';
 import 'package:rubbby/model/model.dart';
 import 'package:rubbby/repository/repository.dart';
+import 'package:rubbby/screen/screen.dart';
 import 'package:rubbby/util/util.dart';
 
 // MARK: - Widget
@@ -48,8 +48,11 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
     });
   }
 
-  void _onPressedTranslateButton() {
-    Navigator.of(context).pushNamed(AppRoutes.result);
+  Future<void> _onPressedTranslateButton() async {
+    final originalText = _textEditingController.text;
+    final translation = await widget.repository.postSentence(originalText, _selectedValue);
+    final resultScreen = ResultScreen(originalText: originalText, translation: translation,);
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => resultScreen));
   }
 
   DropdownButton _buildDropDownButtons() {
