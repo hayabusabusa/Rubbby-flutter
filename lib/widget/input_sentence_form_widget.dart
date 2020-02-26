@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
 
 class InputSentenceFormWidget extends StatefulWidget {
+
+  final FocusNode focusNode;
+
+  InputSentenceFormWidget({
+    Key key,
+    @required this.focusNode,
+  }): super(key: key);
+
   @override
   State<StatefulWidget> createState() => _InputSentenceFormWidgetState();
 }
 
 class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
-  FocusNode _focusNode;
   TextEditingController _textEditingController;
 
   bool _isEditing = false;
 
-  void _onTapCloseButton(BuildContext context) {
-    _focusNode.unfocus();
+  void _onPressCloseButton() {
+    widget.focusNode.unfocus();
   }
 
   void _onUpdateFocusNode() {
     setState(() {
-      _isEditing = _focusNode.hasFocus;
+      _isEditing = widget.focusNode.hasFocus;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _focusNode = FocusNode();
-    _focusNode.addListener(() => _onUpdateFocusNode());
+    widget.focusNode.addListener(() => _onUpdateFocusNode());
     _textEditingController = TextEditingController();
   }
 
@@ -53,7 +59,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                 Expanded(child: SizedBox()),
                 IconButton(
                   icon: Icon(Icons.close),
-                   onPressed: () => _onTapCloseButton(context),
+                   onPressed: () => _onPressCloseButton(),
                 )
               ]
             ),
@@ -62,7 +68,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
             // TextField
             TextField(
               maxLines: null,
-              focusNode: _focusNode,
+              focusNode: widget.focusNode,
               keyboardType: TextInputType.multiline,
               controller: _textEditingController,
               decoration: InputDecoration(
@@ -76,7 +82,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                 Expanded(child: SizedBox()),
                 AnimatedOpacity(
                   opacity: _isEditing ? 0 : 1, 
-                  duration: Duration(milliseconds: 300),
+                  duration: Duration(milliseconds: 200),
                   child: RaisedButton(
                     child: Text('変換する'),
                     onPressed: () {},

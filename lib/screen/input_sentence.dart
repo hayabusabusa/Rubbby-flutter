@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:rubbby/widget/widget.dart';
 
 class InputSentenceScreen extends StatelessWidget {
+  final FocusNode _focusNode = FocusNode(); // 共通のFocusNode
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,17 +15,13 @@ class InputSentenceScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
           children: <Widget>[
-            InputSentenceFormWidget(),
+            InputSentenceFormWidget(focusNode: _focusNode,),
             SizedBox(height: 16,),
             InputSentenceDescWidget()
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: Text('変換する'),
-        icon: Icon(Icons.translate),
-      ),
+      floatingActionButton: InputSentenceFabMenuWidget(focusNode: _focusNode,),
     );
   }
 }
