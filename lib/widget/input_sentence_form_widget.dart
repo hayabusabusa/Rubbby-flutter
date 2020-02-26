@@ -84,7 +84,12 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                   opacity: _isEditing ? 0 : 1, 
                   duration: Duration(milliseconds: 200),
                   child: RaisedButton(
-                    child: Text('変換する'),
+                    child: Text(
+                      '変換する',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: Colors.blue,
+                    shape: StadiumBorder(),
                     onPressed: () {},
                   ),
                 )
