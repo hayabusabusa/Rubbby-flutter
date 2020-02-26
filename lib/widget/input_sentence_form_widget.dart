@@ -6,10 +6,19 @@ class InputSentenceFormWidget extends StatefulWidget {
 }
 
 class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
-  TextEditingController _textEditingController = TextEditingController();
+  FocusNode _focusNode;
+  TextEditingController _textEditingController;
 
   void _onTapCloseButton(BuildContext context) {
-    FocusScope.of(context).unfocus();
+    _focusNode.unfocus();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _focusNode.addListener(() => print('focusNode updated: hasFocus: ${_focusNode.hasFocus}'));
+    _textEditingController = TextEditingController();
   }
 
   @override
@@ -42,9 +51,10 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
             ),
             // Divider
             Divider(color: Colors.grey,),
-            // TextField and translate button
+            // TextField
             TextField(
               maxLines: null,
+              focusNode: _focusNode,
               keyboardType: TextInputType.multiline,
               controller: _textEditingController,
               decoration: InputDecoration(
@@ -52,6 +62,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                 border: InputBorder.none,
               ),
             ),
+            // Translate button
             Row(
               children: <Widget>[
                 Expanded(child: SizedBox()),

@@ -9,7 +9,6 @@ class InputSentenceScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('変換する'),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: null),
       body: Center(
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
@@ -19,6 +18,11 @@ class InputSentenceScreen extends StatelessWidget {
             InputSentenceDescWidget()
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: Text('変換する'),
+        icon: Icon(Icons.translate),
       ),
     );
   }
