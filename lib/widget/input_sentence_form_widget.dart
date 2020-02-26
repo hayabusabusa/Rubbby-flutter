@@ -19,7 +19,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   bool _isEditing = false;
 
   void _onPressCloseButton() {
-    widget.focusNode.unfocus();
+    _textEditingController.text = '';
   }
 
   void _onUpdateFocusNode() {
