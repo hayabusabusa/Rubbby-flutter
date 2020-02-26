@@ -13,7 +13,8 @@ class RubbbyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: AppRoutes.inputSentence,
       routes: {
-        AppRoutes.inputSentence: (context) => InputSentenceScreen()
+        AppRoutes.inputSentence: (context) => InputSentenceScreen(),
+        AppRoutes.result: (context) => ResultScreen(),
       },
     );
   }
