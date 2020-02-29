@@ -1,0 +1,61 @@
+import 'package:equatable/equatable.dart';
+
+import 'package:rubbby/model/model.dart';
+
+// MARK: - Interface
+
+abstract class InputSentenceEvent extends Equatable {
+  const InputSentenceEvent();
+}
+
+// MARK: - Events
+
+class InputTextFieldEdited extends InputSentenceEvent {
+  final String text;
+
+  const InputTextFieldEdited({
+    this.text
+  });
+
+  @override
+  List<Object> get props => [text];
+}
+
+class DropdownMenuItemChanged extends InputSentenceEvent {
+  final OutputType outputType;
+
+  const DropdownMenuItemChanged({
+    this.outputType
+  });
+
+  @override
+  List<Object> get props => [outputType];
+}
+
+class TranslationButtonPressed extends InputSentenceEvent {
+  final String sentence;
+
+  const TranslationButtonPressed({
+    this.sentence
+  });
+
+  @override
+  List<Object> get props => [sentence];
+}
+
+// NOTE: 以下のEventはいらないかもしれない
+
+class ClearButtonPressed extends InputSentenceEvent {
+  @override
+  List<Object> get props => null;
+}
+
+class FabCancelButtonPressed extends InputSentenceEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class DescriptionToggled extends InputSentenceEvent {
+  @override
+  List<Object> get props => [];
+}
