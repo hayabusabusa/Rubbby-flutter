@@ -33,14 +33,10 @@ class DropdownMenuItemChanged extends InputSentenceEvent {
 }
 
 class TranslationButtonPressed extends InputSentenceEvent {
-  final String sentence;
-
-  const TranslationButtonPressed({
-    this.sentence
-  });
+  const TranslationButtonPressed();
 
   @override
-  List<Object> get props => [sentence];
+  List<Object> get props => [];
 }
 
 // NOTE: 以下のEventはいらないかもしれない

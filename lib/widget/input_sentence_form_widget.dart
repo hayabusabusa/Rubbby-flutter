@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:rubbby/model/model.dart';
-import 'package:rubbby/repository/repository.dart';
 import 'package:rubbby/screen/screen.dart';
 import 'package:rubbby/util/util.dart';
 
@@ -9,13 +8,11 @@ import 'package:rubbby/util/util.dart';
 
 class InputSentenceFormWidget extends StatefulWidget {
   final FocusNode focusNode;
-  final HiraganaTranslationRepository repository;
 
   InputSentenceFormWidget({
     Key key,
     @required this.focusNode,
-    @required this.repository,
-  }): assert(focusNode != null, repository != null),
+  }): assert(focusNode != null),
       super(key: key);
 
   @override
@@ -49,10 +46,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   }
 
   Future<void> _onPressedTranslateButton() async {
-    final originalText = _textEditingController.text;
-    final translation = await widget.repository.postSentence(originalText, _selectedValue);
-    final resultScreen = ResultScreen(originalText: originalText, translation: translation,);
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => resultScreen));
+    
   }
 
   DropdownButton _buildDropDownButtons() {
