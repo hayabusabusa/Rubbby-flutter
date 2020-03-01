@@ -20,14 +20,12 @@ class InputSentenceScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
           children: <Widget>[
-            // NOTE: デフォルトだと依存関係を引数で渡すしかない
             InputSentenceFormWidget(focusNode: _focusNode),
             SizedBox(height: 16,),
             InputSentenceDescWidget()
           ],
         ),
       ),
-      // NOTE: デフォルトだと依存関係を引数で渡すしかない
       floatingActionButton: InputSentenceFabMenuWidget(focusNode: _focusNode),
     );
   }

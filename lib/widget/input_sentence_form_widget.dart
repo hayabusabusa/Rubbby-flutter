@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:rubbby/model/model.dart';
+import 'package:rubbby/bloc/blocs.dart';
 import 'package:rubbby/screen/screen.dart';
 import 'package:rubbby/util/util.dart';
 
@@ -22,12 +24,17 @@ class InputSentenceFormWidget extends StatefulWidget {
 // MARK: - State
 
 class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
-  TextEditingController _textEditingController;
+  InputSentenceBloc _inputSentenceBloc;
+  final TextEditingController _textEditingController = TextEditingController();
 
   OutputType _selectedValue = OutputType.hiragana;
   bool _isEditing = false;
   
   // MARK: Private method
+
+  void _onTextChanged() {
+    _inputSentenceBloc.add(InputTextFieldEdited(text: _textEditingController.text));
+  }
 
   void _onPressedCloseButton() {
     _textEditingController.text = '';
@@ -45,8 +52,8 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
     });
   }
 
-  Future<void> _onPressedTranslateButton() async {
-    
+  void _onPressedTranslateButton() {
+    _inputSentenceBloc.add(TranslationButtonPressed());
   }
 
   DropdownButton _buildDropDownButtons() {
@@ -71,12 +78,14 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   @override
   void initState() {
     super.initState();
-    widget.focusNode.addListener(() => _onUpdateFocusNode());
-    _textEditingController = TextEditingController();
+    _inputSentenceBloc = BlocProvider.of<InputSentenceBloc>(context);
+    widget.focusNode.addListener(_onUpdateFocusNode);
+    _textEditingController.addListener(_onTextChanged);
   }
 
   @override
   void dispose() {
+    widget.focusNode.dispose();
     _textEditingController.dispose();
     super.dispose();
   }

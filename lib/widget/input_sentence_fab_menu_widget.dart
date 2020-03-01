@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:rubbby/bloc/blocs.dart';
 import 'package:rubbby/util/util.dart';
 
 // MARK: - Widget
@@ -33,6 +35,7 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
 
   void _onPressedTranslateButton() {
     widget.focusNode.unfocus();
+    BlocProvider.of<InputSentenceBloc>(context).add(TranslationButtonPressed());
   }
 
   void _onPressCancelButton() {
