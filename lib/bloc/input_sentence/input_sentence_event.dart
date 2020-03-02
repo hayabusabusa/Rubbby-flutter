@@ -39,20 +39,3 @@ class TranslationButtonPressed extends InputSentenceEvent {
   @override
   List<Object> get props => [];
 }
-
-// NOTE: 以下のEventはいらないかもしれない
-
-class ClearButtonPressed extends InputSentenceEvent {
-  @override
-  List<Object> get props => null;
-}
-
-class FabCancelButtonPressed extends InputSentenceEvent {
-  @override
-  List<Object> get props => [];
-}
-
-class DescriptionToggled extends InputSentenceEvent {
-  @override
-  List<Object> get props => [];
-}
