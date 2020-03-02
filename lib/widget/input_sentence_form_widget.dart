@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:rubbby/model/model.dart';
-import 'package:rubbby/repository/repository.dart';
+import 'package:rubbby/bloc/blocs.dart';
 import 'package:rubbby/screen/screen.dart';
 import 'package:rubbby/util/util.dart';
 
@@ -9,13 +10,11 @@ import 'package:rubbby/util/util.dart';
 
 class InputSentenceFormWidget extends StatefulWidget {
   final FocusNode focusNode;
-  final HiraganaTranslationRepository repository;
 
   InputSentenceFormWidget({
     Key key,
     @required this.focusNode,
-    @required this.repository,
-  }): assert(focusNode != null, repository != null),
+  }): assert(focusNode != null),
       super(key: key);
 
   @override
@@ -25,12 +24,18 @@ class InputSentenceFormWidget extends StatefulWidget {
 // MARK: - State
 
 class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
-  TextEditingController _textEditingController;
+  InputSentenceBloc _inputSentenceBloc;
+  final TextEditingController _textEditingController = TextEditingController();
 
   OutputType _selectedValue = OutputType.hiragana;
   bool _isEditing = false;
   
   // MARK: Private method
+
+  void _onTextChanged() {
+    // NOTE: add InputTextFieldEdited event
+    _inputSentenceBloc.add(InputTextFieldEdited(text: _textEditingController.text));
+  }
 
   void _onPressedCloseButton() {
     _textEditingController.text = '';
@@ -43,16 +48,35 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   }
 
   void _onChangedDropDownButton(OutputType outputType) {
+    // NOTE: add DropdownMenuItemChanged event
+    _inputSentenceBloc.add(DropdownMenuItemChanged(outputType: outputType));
     setState(() {
       _selectedValue = outputType;
     });
   }
 
-  Future<void> _onPressedTranslateButton() async {
-    final originalText = _textEditingController.text;
-    final translation = await widget.repository.postSentence(originalText, _selectedValue);
-    final resultScreen = ResultScreen(originalText: originalText, translation: translation,);
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => resultScreen));
+  void _onPressedTranslateButton() {
+    // NOTE: add TranslationButtonPressed event
+    _inputSentenceBloc.add(TranslationButtonPressed());
+  }
+
+  void _inputSentenceBlocListenOnData(InputSentenceState state) {
+    // NOTE: Posting sentence to api.
+    if (state is InputSentencePosting) {
+      // TODO: Show HUD.
+      return;
+    // NOTE: Success posting sentence
+    } else if (state is InputSentencePosted) {
+      final resultScreen = ResultScreen(originalText: state.originalText, translation: state.translation);
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => resultScreen));
+    // NOTE: Failed posting sentence
+    } else if (state is InputSentencePostingError) {
+      final snackbar = SnackBar(content: Text('エラーが発生しました。'), backgroundColor: Colors.red,);
+      Scaffold.of(context).showSnackBar(snackbar);
+    // NOTE: Editing
+    } else {
+      return;
+    }
   }
 
   DropdownButton _buildDropDownButtons() {
@@ -68,7 +92,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
         )
       ],
       value: _selectedValue,
-      onChanged: (value) => _onChangedDropDownButton(value),
+      onChanged: _onChangedDropDownButton,
     );
   }
 
@@ -77,12 +101,15 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   @override
   void initState() {
     super.initState();
-    widget.focusNode.addListener(() => _onUpdateFocusNode());
-    _textEditingController = TextEditingController();
+    _inputSentenceBloc = BlocProvider.of<InputSentenceBloc>(context);
+    _inputSentenceBloc.listen(_inputSentenceBlocListenOnData);
+    widget.focusNode.addListener(_onUpdateFocusNode);
+    _textEditingController.addListener(_onTextChanged);
   }
 
   @override
   void dispose() {
+    widget.focusNode.dispose();
     _textEditingController.dispose();
     super.dispose();
   }
@@ -105,7 +132,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                 Expanded(child: SizedBox()),
                 IconButton(
                   icon: Icon(Icons.cancel, color: Colors.grey,),
-                   onPressed: () => _onPressedCloseButton(),
+                   onPressed: _onPressedCloseButton,
                 )
               ]
             ),
@@ -140,7 +167,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                     ),
                     color: Colors.blue,
                     shape: StadiumBorder(),
-                    onPressed: () => _onPressedTranslateButton(),
+                    onPressed: _onPressedTranslateButton,
                   ),
                 )
               ],

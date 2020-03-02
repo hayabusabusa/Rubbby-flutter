@@ -17,6 +17,7 @@ class ResultBottomWidget extends StatelessWidget {
       left: 0,
       right: 0,
       child: Container(
+        color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:rubbby/repository/repository.dart';
+import 'package:rubbby/bloc/blocs.dart';
 import 'package:rubbby/util/util.dart';
 
 // MARK: - Widget
 
 class InputSentenceFabMenuWidget extends StatefulWidget {
   final FocusNode focusNode;
-  final HiraganaTranslationRepository repository;
 
   InputSentenceFabMenuWidget({
     Key key,
     @required this.focusNode,
-    @required this.repository,
-  }): assert(focusNode != null, repository != null),
+  }): assert(focusNode != null),
       super(key: key);
 
   @override
@@ -23,7 +22,7 @@ class InputSentenceFabMenuWidget extends StatefulWidget {
 // MARK: - State
 
 class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget> {
-
+  InputSentenceBloc _inputSentenceBloc;
   bool _isEditing = false;
 
   // MARK: Private method
@@ -36,6 +35,7 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
 
   void _onPressedTranslateButton() {
     widget.focusNode.unfocus();
+    _inputSentenceBloc.add(TranslationButtonPressed());
   }
 
   void _onPressCancelButton() {
@@ -47,6 +47,7 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
   @override
   void initState() {
     super.initState();
+    _inputSentenceBloc = BlocProvider.of<InputSentenceBloc>(context);
     widget.focusNode.addListener(() => _onUpdateFocusNode());
   }
 

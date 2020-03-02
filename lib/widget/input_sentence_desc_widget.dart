@@ -39,7 +39,7 @@ class _InputSentenceDescWidgetState extends State<InputSentenceDescWidget> {
               ),
               Expanded(child: SizedBox()),
               FlatButton(
-                onPressed: () => _onPressedButton(),
+                onPressed: _onPressedButton,
                 child: Text(
                   _isExpanded ? Strings.usageDescriptionClose : Strings.usageDescriptionOpen,
                   style: TextStyle(color: Colors.white),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:rubbby/app_routes.dart';
 import 'package:rubbby/repository/repository.dart';
+import 'package:rubbby/bloc/blocs.dart';
 import 'package:rubbby/screen/screen.dart';
 
 void main() {
@@ -22,11 +24,14 @@ class RubbbyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: AppRoutes.inputSentence,
-      routes: {
-        AppRoutes.inputSentence: (context) => InputSentenceScreen(repository: repository,),
-      },
+    return BlocProvider(
+      create: (context) { return InputSentenceBloc(hiraganaTranslationRepository: repository); },
+      child: MaterialApp(
+        initialRoute: AppRoutes.inputSentence,
+        routes: {
+          AppRoutes.inputSentence: (context) => InputSentenceScreen(),
+        },
+      ),
     );
   }
 }
