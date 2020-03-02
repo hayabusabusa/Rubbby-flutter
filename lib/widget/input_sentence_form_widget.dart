@@ -92,7 +92,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
         )
       ],
       value: _selectedValue,
-      onChanged: (value) => _onChangedDropDownButton(value),
+      onChanged: _onChangedDropDownButton,
     );
   }
 
@@ -132,7 +132,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                 Expanded(child: SizedBox()),
                 IconButton(
                   icon: Icon(Icons.cancel, color: Colors.grey,),
-                   onPressed: () => _onPressedCloseButton(),
+                   onPressed: _onPressedCloseButton,
                 )
               ]
             ),
@@ -167,7 +167,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
                     ),
                     color: Colors.blue,
                     shape: StadiumBorder(),
-                    onPressed: () => _onPressedTranslateButton(),
+                    onPressed: _onPressedTranslateButton,
                   ),
                 )
               ],
