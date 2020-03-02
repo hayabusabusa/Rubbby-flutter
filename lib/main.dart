@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-<<<<<<< HEAD
 void main() => runApp(MyApp());
-=======
-import 'package:rubbby/app_routes.dart';
-import 'package:rubbby/repository/repository.dart';
-import 'package:rubbby/bloc/blocs.dart';
-import 'package:rubbby/screen/screen.dart';
->>>>>>> origin/develop
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -67,7 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -115,16 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
-=======
-    return BlocProvider(
-      create: (context) { return InputSentenceBloc(hiraganaTranslationRepository: repository); },
-      child: MaterialApp(
-        initialRoute: AppRoutes.inputSentence,
-        routes: {
-          AppRoutes.inputSentence: (context) => InputSentenceScreen(),
-        },
-      ),
->>>>>>> origin/develop
     );
   }
 }
