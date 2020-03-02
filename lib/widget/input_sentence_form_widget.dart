@@ -33,6 +33,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   // MARK: Private method
 
   void _onTextChanged() {
+    // NOTE: add InputTextFieldEdited event
     _inputSentenceBloc.add(InputTextFieldEdited(text: _textEditingController.text));
   }
 
@@ -47,13 +48,35 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   }
 
   void _onChangedDropDownButton(OutputType outputType) {
+    // NOTE: add DropdownMenuItemChanged event
+    _inputSentenceBloc.add(DropdownMenuItemChanged(outputType: outputType));
     setState(() {
       _selectedValue = outputType;
     });
   }
 
   void _onPressedTranslateButton() {
+    // NOTE: add TranslationButtonPressed event
     _inputSentenceBloc.add(TranslationButtonPressed());
+  }
+
+  void _inputSentenceBlocListenOnData(InputSentenceState state) {
+    // NOTE: Posting sentence to api.
+    if (state is InputSentencePosting) {
+      // TODO: Show HUD.
+      return;
+    // NOTE: Success posting sentence
+    } else if (state is InputSentencePosted) {
+      final resultScreen = ResultScreen(originalText: state.originalText, translation: state.translation);
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => resultScreen));
+    // NOTE: Failed posting sentence
+    } else if (state is InputSentencePostingError) {
+      final snackbar = SnackBar(content: Text('エラーが発生しました。'), backgroundColor: Colors.red,);
+      Scaffold.of(context).showSnackBar(snackbar);
+    // NOTE: Editing
+    } else {
+      return;
+    }
   }
 
   DropdownButton _buildDropDownButtons() {
@@ -79,6 +102,7 @@ class _InputSentenceFormWidgetState extends State<InputSentenceFormWidget> {
   void initState() {
     super.initState();
     _inputSentenceBloc = BlocProvider.of<InputSentenceBloc>(context);
+    _inputSentenceBloc.listen(_inputSentenceBlocListenOnData);
     widget.focusNode.addListener(_onUpdateFocusNode);
     _textEditingController.addListener(_onTextChanged);
   }

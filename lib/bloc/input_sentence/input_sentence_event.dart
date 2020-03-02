@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 import 'package:rubbby/model/model.dart';
 
@@ -14,7 +15,7 @@ class InputTextFieldEdited extends InputSentenceEvent {
   final String text;
 
   const InputTextFieldEdited({
-    this.text
+    @required this.text
   });
 
   @override
@@ -25,7 +26,7 @@ class DropdownMenuItemChanged extends InputSentenceEvent {
   final OutputType outputType;
 
   const DropdownMenuItemChanged({
-    this.outputType
+    @required this.outputType
   });
 
   @override

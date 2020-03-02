@@ -16,18 +16,33 @@ class InputSentenceBloc extends Bloc<InputSentenceEvent, InputSentenceState> {
   // MARK: Private methods
 
   Stream<InputSentenceState> _mapInputTextFieldEditedToState(InputTextFieldEdited event) async* {
-    final currentState =  (state as InputSentenceEditing);
-    yield InputSentenceEditing(event.text, currentState.outputType);
+    final currentState = state;
+    if (currentState is InputSentenceEditing) {
+      yield InputSentenceEditing(event.text, currentState.outputType);
+    }
   }
 
   Stream<InputSentenceState> _mapDropdownMenuItemChangedToState(DropdownMenuItemChanged event) async* {
-    final currentState =  (state as InputSentenceEditing);
-    yield InputSentenceEditing(currentState.sentence, event.outputType);
+    final currentState = state;
+    if (currentState is InputSentenceEditing) {
+      yield InputSentenceEditing(currentState.sentence, event.outputType);
+    }
   }
 
   Stream<InputSentenceState> _mapTranslationButtonPressedToState(TranslationButtonPressed event) async* {
-    final currentState =  (state as InputSentenceEditing);
-    yield InputSentencePosting(currentState.sentence, currentState.outputType);
+    final currentState = state;
+    if (currentState is InputSentenceEditing) {
+      yield InputSentencePosting(currentState.sentence, currentState.outputType);
+
+      try {
+        final Translation translation = await _hiraganaTranslationRepository.postSentence(currentState.sentence, currentState.outputType);
+        yield InputSentencePosted(currentState.sentence, translation);
+        yield InputSentenceEditing(currentState.sentence, currentState.outputType);
+      } catch (_) {
+        yield InputSentencePostingError();
+        yield InputSentenceEditing(currentState.sentence, currentState.outputType);
+      } 
+    }
   }
 
   // MARK: Overrides

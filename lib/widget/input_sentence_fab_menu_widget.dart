@@ -22,7 +22,7 @@ class InputSentenceFabMenuWidget extends StatefulWidget {
 // MARK: - State
 
 class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget> {
-
+  InputSentenceBloc _inputSentenceBloc;
   bool _isEditing = false;
 
   // MARK: Private method
@@ -35,7 +35,7 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
 
   void _onPressedTranslateButton() {
     widget.focusNode.unfocus();
-    BlocProvider.of<InputSentenceBloc>(context).add(TranslationButtonPressed());
+    _inputSentenceBloc.add(TranslationButtonPressed());
   }
 
   void _onPressCancelButton() {
@@ -47,6 +47,7 @@ class _InputSentenceFabMenuWidgetState extends State<InputSentenceFabMenuWidget>
   @override
   void initState() {
     super.initState();
+    _inputSentenceBloc = BlocProvider.of<InputSentenceBloc>(context);
     widget.focusNode.addListener(() => _onUpdateFocusNode());
   }
 

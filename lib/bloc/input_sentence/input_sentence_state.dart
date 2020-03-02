@@ -40,12 +40,16 @@ class InputSentencePosting extends InputSentenceState {
 }
 
 class InputSentencePosted extends InputSentenceState {
+  final String originalText;
   final Translation translation;
 
   const InputSentencePosted(
-    this.translation
+    this.originalText,
+    this.translation,
   );
 
   @override
   List<Object> get props => [translation];
 }
+
+class InputSentencePostingError extends InputSentenceState {}
