@@ -13,6 +13,8 @@ void main() {
   final apiClient = HiraganaTranslationApiClient();
   final repository = HiraganaTranslationRepository(apiClient: apiClient);
   // NOTE: Hive
+  // NOTE: カスタムのオブジェクトはここでAdapterを登録しなければならない.
+  //       保存したいオブジェクトが増えるほどここは増えていくので、大規模なものには向かないかもしれない.
   Hive.registerAdapter(HistoryAdapter());
 
   runApp(RubbbyApp(repository: repository,));
