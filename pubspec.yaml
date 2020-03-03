@@ -11,8 +11,14 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
+
+  # Bloc
   flutter_bloc: ^3.2.0
+  # Network
   http: ^0.12.0+4
+  # Database
+  hive: ^1.4.1+1
+  # Util
   equatable: ^1.1.0
 
 dev_dependencies:
