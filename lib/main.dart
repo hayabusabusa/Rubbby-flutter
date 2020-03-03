@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 import 'package:rubbby/app_routes.dart';
+import 'package:rubbby/model/model.dart';
 import 'package:rubbby/repository/repository.dart';
 import 'package:rubbby/bloc/blocs.dart';
 import 'package:rubbby/screen/screen.dart';
 
 void main() {
+  // NOTE: API
   final apiClient = HiraganaTranslationApiClient();
   final repository = HiraganaTranslationRepository(apiClient: apiClient);
+  // NOTE: Hive
+  Hive.registerAdapter(HistoryAdapter());
 
   runApp(RubbbyApp(repository: repository,));
 }
