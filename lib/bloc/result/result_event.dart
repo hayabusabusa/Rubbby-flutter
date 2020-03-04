@@ -13,12 +13,12 @@ abstract class ResultEvent extends Equatable {
 
 // MARK: - Event
 
-class ResultLoadHistories extends ResultEvent {}
-
-class ResultAddHistory extends ResultEvent {
+/// 初回ロード時には最新のものを追加した状態のものをロードしたいため
+/// 引数に`History`を持たせる.
+class ResultLoadHistories extends ResultEvent {
   final History history;
 
-  const ResultAddHistory(this.history);
+  const ResultLoadHistories(this.history);
 
   @override
   List<Object> get props => [history];
