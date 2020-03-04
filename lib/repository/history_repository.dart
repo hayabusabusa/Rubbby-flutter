@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:rubbby/model/model.dart';
 
@@ -17,17 +18,19 @@ class HistoryRepositoryImpl extends HistoryRepository {
   Future<List<History>> loadHistories() async {
     // NOTE: Open hive box at first time.
     if (_historiesBox == null) {
+      await Hive.initFlutter();
       final box = await Hive.openBox<History>(HiveBoxNames.history);
       _historiesBox = box;
     }
 
-    final histories = _historiesBox.values;
+    final histories = _historiesBox.values.toList();
     return histories;
   }
 
   Future<void> addHistory(History history) async {
     // NOTE: Open hive box at first time.
     if (_historiesBox == null) {
+      await Hive.initFlutter();
       final box = await Hive.openBox<History>(HiveBoxNames.history);
       _historiesBox = box;
     }
