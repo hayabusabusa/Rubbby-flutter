@@ -26,6 +26,12 @@ class HistoryRepositoryImpl extends HistoryRepository {
   }
 
   Future<void> addHistory(History history) async {
+    // NOTE: Open hive box at first time.
+    if (_historiesBox == null) {
+      final box = await Hive.openBox<History>(HiveBoxNames.history);
+      _historiesBox = box;
+    }
+
     return _historiesBox.add(history);
   }
 }

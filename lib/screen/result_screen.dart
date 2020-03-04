@@ -26,7 +26,8 @@ class ResultScreen extends StatelessWidget {
           ListView(
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
             children: <Widget>[
-              ResultOutputWidget(convertedText: translation.converted, originalText: originalText)
+              ResultOutputWidget(convertedText: translation.converted, originalText: originalText),
+              ResultHistoryListWidget(originalText: originalText, translation: translation),
             ],
           ),
           // Button
