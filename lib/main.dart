@@ -54,6 +54,7 @@ class RubbbyApp extends StatelessWidget {
         initialRoute: AppRoutes.inputSentence,
         routes: {
           AppRoutes.inputSentence: (context) => InputSentenceScreen(),
+          AppRoutes.history: (context) => HistoryScreen(),
         },
       ),
     );
