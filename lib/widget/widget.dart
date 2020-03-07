@@ -6,3 +6,4 @@ export './result_bottom_widget.dart';
 export './result_list_widget.dart';
 export './result_history_list_widget.dart';
 export './history_widget.dart';
+export './history_list_widget.dart';

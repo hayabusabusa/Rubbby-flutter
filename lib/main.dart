@@ -39,15 +39,15 @@ class RubbbyApp extends StatelessWidget {
       providers: [
         // NOTE: InputSentece Bloc
         BlocProvider<InputSentenceBloc>(
-          create: (context) { 
-            return InputSentenceBloc(hiraganaTranslationRepository: hiraganaTranslationRepository);
-          },
+          create: (context) => InputSentenceBloc(hiraganaTranslationRepository: hiraganaTranslationRepository),
+        ),
+        // NOTE: History Bloc
+        BlocProvider<HistoryBloc>(
+          create: (context) => HistoryBloc(historyRepository: historyRepository),
         ),
         // NOTE: Result Bloc
         BlocProvider<ResultBloc>(
-          create: (context) {
-            return ResultBloc(historyRepository: historyRepository);
-          },
+          create: (context) => ResultBloc(historyRepository: historyRepository),
         ),
       ], 
       child: MaterialApp(

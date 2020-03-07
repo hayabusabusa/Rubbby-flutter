@@ -15,10 +15,10 @@ abstract class HistoryEvent extends Equatable {
 
 class LoadHistories extends HistoryEvent {}
 
-class AddHistory extends HistoryEvent {
+class DeleteHistory extends HistoryEvent {
   final History history;
 
-  const AddHistory(this.history);
+  const DeleteHistory(this.history);
 
   @override
   List<Object> get props => [history];
