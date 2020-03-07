@@ -13,12 +13,13 @@ class HistoryWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             // Converted Text
             Text(
               history.convertedText,
               textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             // Divider
             Divider(color: Colors.grey),
@@ -26,7 +27,7 @@ class HistoryWidget extends StatelessWidget {
             Text(
               history.originalText,
               textAlign: TextAlign.left,
-              style: TextStyle(color: Colors.grey, fontSize: 16),
+              style: TextStyle(color: Colors.grey, fontSize: 13),
             ),
           ],
         ),
