@@ -21,8 +21,8 @@ class HistoryWidget extends StatelessWidget {
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            // Divider
-            Divider(color: Colors.grey),
+            // Spacer
+            SizedBox(height: 8,),
             // Original Text
             Text(
               history.originalText,
