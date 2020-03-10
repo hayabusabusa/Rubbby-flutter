@@ -22,7 +22,7 @@ class _InputSentenceDescWidgetState extends State<InputSentenceDescWidget> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.red,
+        color: Colors.red[400],
         borderRadius: BorderRadius.all(Radius.circular(8))
       ),
       child: Column(
@@ -33,6 +33,11 @@ class _InputSentenceDescWidgetState extends State<InputSentenceDescWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
+              Icon(
+                Icons.info,
+                color: Colors.white
+              ),
+              SizedBox(width: 8),
               Text(
                 Strings.usageDescriptionTitle,
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),

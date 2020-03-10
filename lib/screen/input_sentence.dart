@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:rubbby/bloc/blocs.dart';
+import 'package:rubbby/app_routes.dart';
 import 'package:rubbby/widget/widget.dart';
 import 'package:rubbby/util/util.dart';
 
 class InputSentenceScreen extends StatelessWidget {
   final FocusNode _focusNode = FocusNode(); // 共通のFocusNode
+
+  // MARK: Private
+
+  void _onPressedHistory(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.history);
+  }
+
+  // MARK: Override
 
   InputSentenceScreen({
     Key key,
@@ -21,8 +28,18 @@ class InputSentenceScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
         children: <Widget>[
+          // Form
           InputSentenceFormWidget(focusNode: _focusNode),
-          SizedBox(height: 16,),
+          // Spacer
+          SizedBox(height: 12,),
+          // To history
+          InputSentenceFeatureWidget(
+            title: '変換履歴を表示する', 
+            onPressed: () => _onPressedHistory(context),
+          ),
+          // Spacer
+          SizedBox(height: 12,),
+          // Description
           InputSentenceDescWidget()
         ],
       ),
