@@ -5,7 +5,7 @@ class ResultOutputWidget extends StatelessWidget {
   final String convertedText;
   final String originalText;
 
-  ResultOutputWidget({
+  const ResultOutputWidget({
     Key key,
     @required this.convertedText,
     @required this.originalText

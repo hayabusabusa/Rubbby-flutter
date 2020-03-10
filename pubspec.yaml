@@ -4,21 +4,31 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
+
+  # Bloc
   flutter_bloc: ^3.2.0
+  # Network
   http: ^0.12.0+4
+  # Database Hive
+  hive: ^1.4.1+1
+  hive_flutter: ^0.3.0+2
+  # Util
   equatable: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Hive
+  hive_generator: ^0.7.0+2
+  build_runner: ^1.7.4
 
 flutter:
   uses-material-design: true

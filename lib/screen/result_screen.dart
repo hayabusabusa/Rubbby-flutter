@@ -23,12 +23,7 @@ class ResultScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           // List
-          ListView(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
-            children: <Widget>[
-              ResultOutputWidget(convertedText: translation.converted, originalText: originalText)
-            ],
-          ),
+          ResultListWidget(originalText: originalText, translation: translation,),
           // Button
           ResultBottomWidget(),
         ],
